@@ -22,7 +22,7 @@ interface DogsImageDao {
     @Query("SELECT * FROM dogs_image_table ORDER BY breed DESC")
     fun getAllDogsImages() : LiveData<List<DogsImageEntity>>
 
-    @Query("SELECT * FROM dogs_image_table WHERE urlImage = :id")
-    fun getBreedByID(id: String) : LiveData<DogsImageEntity>
+    @Query("SELECT * FROM dogs_image_table WHERE breed = :id")
+    fun getBreedByBreed(id: String) : LiveData<List<DogsImageEntity>>
 
 }

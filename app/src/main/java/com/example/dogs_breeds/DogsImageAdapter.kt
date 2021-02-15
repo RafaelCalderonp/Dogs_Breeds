@@ -22,6 +22,7 @@ class DogsImageAdapter: RecyclerView.Adapter<DogsImageAdapter.ImageDogsVH>() {
     inner class ImageDogsVH(private val mBinding:DogsImageBinding):
         RecyclerView.ViewHolder(mBinding.root){
         fun bind(dogsImage: DogsImageEntity){
+            Log.d("REPOS", "11")
             Glide.with(mBinding.ivDogsImage).load(dogsImage.urlImage).into(mBinding.ivDogsImage)
         }
     }

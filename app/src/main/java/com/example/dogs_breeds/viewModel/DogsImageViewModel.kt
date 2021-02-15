@@ -14,23 +14,24 @@ import kotlinx.coroutines.launch
 class DogsImageViewModel (application: Application) : AndroidViewModel(application) {
     private val repository: DogsImageRepository
     val livedataFromInternet: LiveData<List<DogsImage>>
-    val allImageDogs: LiveData<List<DogsImageEntity>>
     var breed= "-1"
 
 
-    fun getDogsById(id: String){
-        breed = id
+
+    fun getDogsById(id: String) =viewModelScope.launch{
+       breed = id
+        repository.fetchImageDogsData(breed)
     }
+    fun getImages():LiveData<List<DogsImageEntity>> = repository.abc(breed)
+
+
 
     init {
 
         Log.d("REPart", "2 $breed")
         val dogsImageDao = DogsImageDataBase.getDataBase(application).getImageDogsDao()
         repository = DogsImageRepository(dogsImageDao)
-        allImageDogs=repository.listAllDogs
-        viewModelScope.launch {
-            repository.fetchImageDogsData(breed)
-        }
+
         livedataFromInternet = repository.dataFromInternet
     }
 }

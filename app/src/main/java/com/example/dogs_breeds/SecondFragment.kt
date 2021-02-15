@@ -49,10 +49,11 @@ class SecondFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.d("REPOS", "3")
         val adapter = DogsImageAdapter()
+        mBinding.rvDogsImage.adapter = adapter
 
         mBinding.rvDogsImage.layoutManager = GridLayoutManager(context, 2)
         Log.d("REPOS", "4")
-        viewModel.allImageDogs.observe(viewLifecycleOwner, Observer {
+        viewModel.getImages().observe(viewLifecycleOwner, Observer {
             it?.let {
                 Log.d("REPOS", "5")
                 adapter.update(it)
